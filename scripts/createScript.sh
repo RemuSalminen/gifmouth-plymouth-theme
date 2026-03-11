@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-FRAMECOUNT=$(./frameCount.sh)
-TEMPLATE='./customGif.script.template'
+DIR="$( cd -- "$( dirname --  "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+FRAMECOUNT=$($DIR/frameCount.sh)
+TEMPLATE="$DIR/customGif.script.template"
 SCRIPTNAME='customGif.script'
 
-sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > $SCRIPTNAME
+sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > $DIR/$SCRIPTNAME
