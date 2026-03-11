@@ -1,0 +1,27 @@
+frameCount = 0;
+
+screen.w = Window.GetWidth();
+screen.h = Window.GetHeight();
+screen.half.w = screen.w / 2;
+screen.half.h = screen.h / 2;
+
+// Animation //
+for (i = 0; i <= frameCount; i++) {
+	frame[i] = Image("frame-" + i + ".png");
+}
+
+// Center Sprite //
+sprite = Sprite();
+sprite.SetX(screen.half.w - images[0].GetWidth() / 2);
+sprite.SetY(screen.half.h - images[0].GetHeight() / 2);
+
+// Set Updater //
+time = 0;
+fun animate () {
+	sprite.SetImage(frame[time]);
+	time++;
+}
+Plymouth.SetRefreshFunction(animate);
+
+// https://www.freedesktop.org/wiki/Software/Plymouth/Scripts/
+// https://joekuan.wordpress.com/2010/08/05/plymouth-create-your-own-splash-screen-with-scrolling-boot-messages/
