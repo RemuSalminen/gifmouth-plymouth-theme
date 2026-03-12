@@ -19,7 +19,7 @@ let
 	};
 in
 stdenvNoCC.mkDerivation {
-	pname = "plymouth-customGif";
+	pname = "plymouth-customGif-theme";
 	version = "1.0.0";
 	src = ./.;
 
