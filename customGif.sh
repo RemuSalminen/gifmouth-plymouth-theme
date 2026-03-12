@@ -6,12 +6,8 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-if (rm ./frames/*.png); then
-	echo "Succesfully Removed Old Frames!"
-else
-	echo "Could Not Remove Old Frames!"
-	exit 1
-fi
+rm ./frames/*.png
+rm ./scripts/customGif.script
 
 ## Process GIF
 magick $1 "./frames/frame.png"
