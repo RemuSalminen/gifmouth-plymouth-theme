@@ -1,7 +1,6 @@
 {
 	stdenvNoCC,
 	imagemagick,
-	coreutils,
 	fetchurl,
 	bash,
 	gifSource ? "",
@@ -24,7 +23,6 @@ stdenvNoCC.mkDerivation {
 
 	buildInputs = [
 		imagemagick
-		coreutils
 	];
 
 	buildPhase = ''
