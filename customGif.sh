@@ -21,6 +21,6 @@ FRAMECOUNT=find ./frames/ -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\
 TEMPLATE="./scripts/customGif.script.template"
 SCRIPTNAME='customGif.script'
 
-sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > $SCRIPTNAME
+sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > ./scripts/$SCRIPTNAME
 
 echo "Theme Created Succesfully!"
