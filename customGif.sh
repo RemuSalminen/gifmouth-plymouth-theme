@@ -10,7 +10,7 @@ rm ./frames/*.png
 rm ./scripts/customGif.script
 
 ## Process GIF
-magick $1 "./frames/frame.png"
+magick $1 -coalesce "./frames/frame.png"
 
 ## Create Script
 FRAMECOUNT=$(find ./frames -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\.png)" | sort -nr | head -n 1)
