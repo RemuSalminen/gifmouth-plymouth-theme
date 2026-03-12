@@ -5,4 +5,4 @@ ModuleName=script
 
 [script]
 ImageDir=/usr/share/plymouth/themes/customGif/frames
-ScriptDir=/usr/share/plymouth/themes/customGif/scripts/customGif.script
+ScriptFile=/usr/share/plymouth/themes/customGif/scripts/customGif.script
