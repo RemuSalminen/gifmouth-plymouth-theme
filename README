@@ -4,7 +4,7 @@ A Plymouth theme that can be used to dynamically generate a boot splash from any
 
 ## Installation / Usage
 ### NixOS (with flakes)
-Include the source
+Include the source:
 ```nix
 {
 	inputs = {
@@ -77,4 +77,28 @@ The URL & HASH defined when overlayed can be overridden:
 </details>
 
 ### Other Linux Distros
+To prepare the Theme, execute the script with the path to the GIF as an argument.
+```bash
+$ ./gifmouth.sh <path-to-GIF>
+```
+This will split the GIF to its frames (using ImageMagick) and construct the Plymouth script based on their count.
 
+It will result in the following file structure.
+```
+.
+├── frames
+│   ├── frame-###.png
+│   └── README
+├── gifmouth.plymouth
+├── gifmouth.sh
+├── package.nix
+├── README
+└── scripts
+    ├── gifmouth.script
+    └── gifmouth.script.template
+```
+Now copy the `frames` folder, `gifmouth.plymouth`, and `scripts/gifmouth.script` into `/usr/share/plymouth/themes/gifmouth` whilst maintaining their folder structure. Alternatively, you can git clone this repository directly into the themes directory, allowing quicker changing of the GIF. Or Symlink the files. The method doesn't matter, as long as the files are present.
+
+To actually change the theme, run `plymouth-set-default-theme -R gifmouth`.
+
+If it does not work, consult your distro's documentation.
