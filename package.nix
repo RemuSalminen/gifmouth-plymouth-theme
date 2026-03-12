@@ -1,8 +1,9 @@
 {
 	stdenvNoCC,
-	imagemagick,
 	fetchurl,
+	lib,
 	bash,
+	imagemagick,
 	gifSource ? "",
 	gifHash ? "",
 }:
@@ -21,20 +22,32 @@ stdenvNoCC.mkDerivation {
 	version = "1.0.0";
 	src = ./.;
 
-	buildInputs = [
+	nativeBuildInputs = [
 		imagemagick
+		bash
 	];
 
 	buildPhase = ''
-		substituteInPlace customGif.sh --replace-fail '/usr/bin/env bash' ${bash}/bin/bash
-		./customGif.sh ${gif}
+		runHook preBuild
+
+		${lib.getExe bash} ./customGif.sh ${gif}
+
+		runHook postBuild
 	'';
 
 	installPhase = ''
 		runHook preInstall
+
 		mkdir -p ${plymouthDir}
-		cp -r ./* ${plymouthDir}
+		mkdir ${plymouthDir}/frames
+		mkdir ${plymouthDir}/scripts
+
+		cp customGif.plymouth ${plymouthDir}
+		cp frames/* ${plymouthDir}/frames/
+		cp scripts/customGif.script ${plymouthDir}/scripts/
+
 		substituteInPlace ${plymouthDir}/customGif.plymouth --replace-fail "/usr/" "$out/"
+
 		runHook postInstall
 	'';
 
