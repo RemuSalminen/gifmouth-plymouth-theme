@@ -53,7 +53,12 @@ stdenvNoCC.mkDerivation {
 		runHook postInstall
 	'';
 
-	meta = {};
+	meta = {
+		description = "Plymouth theme that turns any GIF into an Animated theme";
+		homepage = "https://github.com/RemuSalminen/gifmouth-plymouth-theme";
+		license = lib.licenses.mit;
+		platforms = lib.platforms.linux;
+	};
 }
 
 # https://lantian.pub/en/article/modify-computer/nixos-packaging.lantian/
