@@ -7,15 +7,15 @@ if [ -z "$1" ]; then
 fi
 
 rm ./frames/*.png
-rm ./scripts/customGif.script
+rm ./scripts/gifmouth.script
 
 ## Process GIF
 magick $1 -coalesce "./frames/frame.png"
 
 ## Create Script
 FRAMECOUNT=$(find ./frames -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\.png)" | sort -nr | head -n 1)
-TEMPLATE="./scripts/customGif.script.template"
-SCRIPTNAME='customGif.script'
+TEMPLATE="./scripts/gifmouth.script.template"
+SCRIPTNAME='gifmouth.script'
 
 sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > ./scripts/$SCRIPTNAME
 

@@ -12,14 +12,14 @@
 assert gifSource != "" || throw "GIF source not defined! package.override { gifSource = '<link>'; }";
 
 let
-	plymouthDir = "$out/share/plymouth/themes/customGif";
+	plymouthDir = "$out/share/plymouth/themes/gifmouth";
 	gif = fetchurl {
 		url = gifSource;
 		hash = gifHash;
 	};
 in
 stdenvNoCC.mkDerivation {
-	pname = "plymouth-customGif-theme";
+	pname = "plymouth-gifmouth-theme";
 	version = "1.0.0";
 	src = ./.;
 
@@ -32,7 +32,7 @@ stdenvNoCC.mkDerivation {
 	buildPhase = ''
 		runHook preBuild
 
-		${lib.getExe bash} ./customGif.sh ${gif}
+		${lib.getExe bash} ./gifmouth.sh ${gif}
 
 		runHook postBuild
 	'';
@@ -44,11 +44,11 @@ stdenvNoCC.mkDerivation {
 		mkdir ${plymouthDir}/frames
 		mkdir ${plymouthDir}/scripts
 
-		cp customGif.plymouth ${plymouthDir}
+		cp gifmouth.plymouth ${plymouthDir}
 		cp frames/* ${plymouthDir}/frames/
-		cp scripts/customGif.script ${plymouthDir}/scripts/
+		cp scripts/gifmouth.script ${plymouthDir}/scripts/
 
-		substituteInPlace ${plymouthDir}/customGif.plymouth --replace-fail "/usr/" "$out/"
+		substituteInPlace ${plymouthDir}/gifmouth.plymouth --replace-fail "/usr/" "$out/"
 
 		runHook postInstall
 	'';
