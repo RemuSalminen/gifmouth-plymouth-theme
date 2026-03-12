@@ -48,3 +48,4 @@ stdenvNoCC.mkDerivation {
 
 # https://lantian.pub/en/article/modify-computer/nixos-packaging.lantian/
 # https://ryantm.github.io/nixpkgs/builders/fetchers/
+# https://discourse.nixos.org/t/packaging-a-bash-script-issues/20224/3 ## Debug Building on a Flake based system
