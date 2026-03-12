@@ -13,7 +13,7 @@ rm ./scripts/customGif.script
 magick $1 "./frames/frame.png"
 
 ## Create Script
-FRAMECOUNT=find ./frames/ -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\.png)" | sort -nr | head -n 1
+FRAMECOUNT=$(find ./frames -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\.png)" | sort -nr | head -n 1)
 TEMPLATE="./scripts/customGif.script.template"
 SCRIPTNAME='customGif.script'
 
