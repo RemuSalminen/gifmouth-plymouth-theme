@@ -17,7 +17,7 @@ sprite.SetY(screen.half.h - frame[0].GetHeight() / 2);
 // Set Updater //
 time = 0;
 fun animate () {
-	sprite.SetImage(frame[time]);
+	sprite.SetImage(frame[Math.Int(time / 2)]);
 	time++;
 }
 Plymouth.SetRefreshFunction(animate);
