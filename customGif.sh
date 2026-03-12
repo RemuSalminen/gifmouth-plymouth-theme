@@ -13,18 +13,14 @@ else
 	exit 1
 fi
 
-if (./scripts/processGif.sh "$1"); then
-	echo "Succesfully Processed GIF!"
-else
-	echo "Could Not Process GIF"!
-	exit 1
-fi
+## Process GIF
+magick $1 "./frames/frame.png"
 
-if (./scripts/createScript.sh); then
-	echo "Succesfully Created Script File!"
-else
-	echo "Could Not Create Script File!"
-	exit 1
-fi
+## Create Script
+FRAMECOUNT=find ./frames/ -type f -printf '%p\n' | grep -o -P "(?<=frame-).*(?=\.png)" | sort -nr | head -n 1
+TEMPLATE="./scripts/customGif.script.template"
+SCRIPTNAME='customGif.script'
+
+sed "1 i frameCount = $FRAMECOUNT;" $TEMPLATE > $SCRIPTNAME
 
 echo "Theme Created Succesfully!"
