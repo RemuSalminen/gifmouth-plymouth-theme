@@ -4,6 +4,7 @@
 	lib,
 	bash,
 	imagemagick,
+	coreutils,
 	gifSource ? "",
 	gifHash ? "",
 }:
@@ -25,6 +26,7 @@ stdenvNoCC.mkDerivation {
 	nativeBuildInputs = [
 		imagemagick
 		bash
+		coreutils
 	];
 
 	buildPhase = ''
