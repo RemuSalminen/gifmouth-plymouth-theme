@@ -11,8 +11,8 @@ for (i = 0; i <= frameCount; i++) {
 
 // Center Sprite //
 sprite = Sprite();
-sprite.SetX(screen.half.w - images[0].GetWidth() / 2);
-sprite.SetY(screen.half.h - images[0].GetHeight() / 2);
+sprite.SetX(screen.half.w - frame[0].GetWidth() / 2);
+sprite.SetY(screen.half.h - frame[0].GetHeight() / 2);
 
 // Set Updater //
 time = 0;
