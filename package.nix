@@ -1,6 +1,5 @@
 {
 	stdenvNoCC,
-	lib,
 	imagemagick,
 	coreutils,
 	fetchurl,
@@ -29,10 +28,10 @@ stdenvNoCC.mkDerivation {
 	];
 
 	buildPhase = ''
-		substituteInPlace customGif.sh --replace-fail '/usr/bin/env bash' ${lib.getExe bash}
-		substituteInPlace ./scripts/processGif.sh --replace-fail '/usr/bin/env bash' ${lib.getExe bash}
-		substituteInPlace ./scripts/frameCount.sh --replace-fail '/usr/bin/env bash' ${lib.getExe bash}
-		substituteInPlace ./scripts/createScript.sh --replace-fail '/usr/bin/env bash' ${lib.getExe bash}
+		substituteInPlace customGif.sh --replace-fail '/usr/bin/env bash' ${bash}/bin/bash
+		substituteInPlace ./scripts/processGif.sh --replace-fail '/usr/bin/env bash' ${bash}/bin/bash
+		substituteInPlace ./scripts/frameCount.sh --replace-fail '/usr/bin/env bash' ${bash}/bin/bash
+		substituteInPlace ./scripts/createScript.sh --replace-fail '/usr/bin/env bash' ${bash}/bin/bash
 		./customGif.sh ${gif}
 	'';
 
