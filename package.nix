@@ -4,6 +4,7 @@
 	lib,
 	bash,
 	imagemagick,
+	ffmpeg,
 	coreutils,
 	gifSource ? "",
 	gifHash ? "",
@@ -25,6 +26,7 @@ stdenvNoCC.mkDerivation {
 
 	nativeBuildInputs = [
 		imagemagick
+		ffmpeg
 		bash
 		coreutils
 	];
