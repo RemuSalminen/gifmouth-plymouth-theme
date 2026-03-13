@@ -6,18 +6,21 @@
 	imagemagick,
 	ffmpeg,
 	coreutils,
+	gifLocal ? null,
 	gifSource ? "",
 	gifHash ? "",
 }:
 
-assert gifSource != "" || throw "GIF source not defined! package.override { gifSource = '<link>'; }";
+assert (gifLocal != null || gifSource != "") || throw "GIF/Video source not defined! package.override { gifLocal = path; OR gifSource = 'URL'; gifHash = 'HASH' }";
 
 let
 	plymouthDir = "$out/share/plymouth/themes/gifmouth";
-	gif = fetchurl {
-		url = gifSource;
-		hash = gifHash;
-	};
+	gif = if gifLocal != null
+		then gifLocal
+		else fetchurl {
+			url = gifSource;
+			hash = gifHash;
+		};
 in
 stdenvNoCC.mkDerivation {
 	pname = "plymouth-gifmouth-theme";
