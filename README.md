@@ -1,6 +1,7 @@
 # gifmouth: A Plymouth Theme
 
 A Plymouth theme that can be used to dynamically generate a boot splash from any GIF you can think of!
+In advertently, it also works on all video formats supported by ffmpeg!
 
 ## Installation / Usage
 ### NixOS (with flakes)
@@ -77,11 +78,11 @@ The URL & HASH defined when overlayed can be overridden:
 </details>
 
 ### Other Linux Distros
-To prepare the Theme, execute the script with the path to the GIF as an argument.
+To prepare the Theme, execute the script with the path to the GIF/Video as an argument.
 ```bash
 $ ./gifmouth.sh <path-to-GIF>
 ```
-This will split the GIF to its frames (using ImageMagick) and construct the Plymouth script based on their count.
+This will split the GIF to its frames (using ImageMagick) and construct the Plymouth script based on their count. If used on Videos, it also requires ffmpeg as a dependency!
 
 It will result in the following file structure.
 ```
