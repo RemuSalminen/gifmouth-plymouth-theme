@@ -17,6 +17,28 @@ Include the source:
 }
 ```
 Define it as a themePackage:
+
+<details>
+<summary><strong>With a Local File</strong></summary>
+
+```nix
+{
+	boot.plymouth = {
+		enable = true;
+		theme = "gifmouth";
+		themePackages = [
+			(pkgs.callPackage (inputs.plymouth-gifmouth-theme + /package.nix) {
+				gifLocal = PATH;
+			});
+		];
+	};
+}
+```
+
+</details>
+<details>
+<summary><strong>With an Online File</strong></summary>
+
 ```nix
 {
 	boot.plymouth = {
@@ -31,7 +53,10 @@ Define it as a themePackage:
 	};
 }
 ```
-Remember to change URL and HASH with their corresponding values.
+
+</details>
+
+Remember to change PATH, URL and HASH to their corresponding values. If gifLocal is defined, it will be used instead of the Online File.
 <details>
 <summary><strong>Accessing the Package from pkgs</strong></summary>
 
@@ -41,6 +66,7 @@ For convenience, it might be reasonable to overlay the package on top of nixpkgs
 nixpkgs.overlays = [
 	(final: prev: {
 		plymouth-gifmouth-theme = pkgs.callPackage (inputs.plymouth-gifmouth-theme + /package.nix) {
+			gifLocal = PATH;
 			gifSource = "URL";
 			gifHash = "HASH";
 		};
@@ -67,6 +93,7 @@ The URL & HASH defined when overlayed can be overridden:
 		theme = "gifmouth";
 		themePackages = [
 			(pkgs.plymouth-gifmouth-theme.override {
+				gifLocal = PATH;
 				gifSource = "URL";
 				gifHash = "HASH";
 			});
