@@ -6,8 +6,10 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-rm ./frames/*.png
-rm ./scripts/gifmouth.script
+rm -f ./frames/*.png
+rm -f ./scripts/gifmouth.script
+
+set -e
 
 ## Process GIF
 magick $1 -coalesce "./frames/frame.png"
