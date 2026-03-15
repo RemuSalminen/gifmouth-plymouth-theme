@@ -3,6 +3,8 @@
 A Plymouth theme that can be used to dynamically generate a boot splash from any GIF you can think of!
 In advertently, it also works on all video formats supported by ffmpeg!
 
+Test it out with the included example GIF!
+
 ## Installation / Usage
 ### NixOS (with flakes)
 Include the source:
