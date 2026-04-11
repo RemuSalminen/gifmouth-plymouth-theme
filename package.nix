@@ -26,12 +26,7 @@ in
 stdenvNoCC.mkDerivation {
   pname = "plymouth-gifmouth-theme";
   version = "1.0.0";
-  src = fetchFromGitHub {
-    owner = "RemuSalminen";
-    repo = "gifmouth-plymouth-theme";
-    rev = "873201665aff1cc9a1ddc88463bbcc5826fe9340";
-    hash = "sha256-0khA/mjV8qMF7hb02tx8z/OQ0BVRvMRDpH/8yzVLROU=";
-  };
+  src = ./.;
 
   nativeBuildInputs = [
     imagemagick
