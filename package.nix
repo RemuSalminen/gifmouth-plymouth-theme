@@ -3,10 +3,8 @@
   fetchurl,
   fetchFromGitHub,
   lib,
-  bash,
   imagemagick,
   ffmpeg,
-  coreutils,
   gifLocal ? null,
   gifSource ? "",
   gifHash ? "",
@@ -38,14 +36,12 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [
     imagemagick
     ffmpeg
-    bash
-    coreutils
   ];
 
   buildPhase = ''
     runHook preBuild
 
-    ${lib.getExe bash} ./gifmouth.sh ${gif}
+    ./gifmouth.sh ${gif}
 
     runHook postBuild
   '';
