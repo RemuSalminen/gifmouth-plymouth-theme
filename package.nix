@@ -1,69 +1,78 @@
 {
-	stdenvNoCC,
-	fetchurl,
-	lib,
-	bash,
-	imagemagick,
-	ffmpeg,
-	coreutils,
-	gifLocal ? null,
-	gifSource ? "",
-	gifHash ? "",
+  stdenvNoCC,
+  fetchurl,
+  fetchFromGitHub,
+  lib,
+  bash,
+  imagemagick,
+  ffmpeg,
+  coreutils,
+  gifLocal ? null,
+  gifSource ? "",
+  gifHash ? "",
 }:
 
-assert (gifLocal != null || gifSource != "") || throw "GIF/Video source not defined! package.override { gifLocal = path; OR gifSource = 'URL'; gifHash = 'HASH' }";
-
 let
-	plymouthDir = "$out/share/plymouth/themes/gifmouth";
-	gif = if gifLocal != null
-		then gifLocal
-		else fetchurl {
-			url = gifSource;
-			hash = gifHash;
-		};
+  plymouthDir = "$out/share/plymouth/themes/gifmouth";
+  gif =
+    if gifLocal == null && gifSource == "" then
+      "./example.gif"
+    else if gifLocal != null then
+      gifLocal
+    else
+      fetchurl {
+        url = gifSource;
+        hash = gifHash;
+      };
 in
 stdenvNoCC.mkDerivation {
-	pname = "plymouth-gifmouth-theme";
-	version = "1.0.0";
-	src = ./.;
+  pname = "plymouth-gifmouth-theme";
+  version = "1.0.0";
+  src = fetchFromGitHub {
+    owner = "RemuSalminen";
+    repo = "gifmouth-plymouth-theme";
+    rev = "873201665aff1cc9a1ddc88463bbcc5826fe9340";
+    hash = "sha256-0khA/mjV8qMF7hb02tx8z/OQ0BVRvMRDpH/8yzVLROU=";
+  };
 
-	nativeBuildInputs = [
-		imagemagick
-		ffmpeg
-		bash
-		coreutils
-	];
+  nativeBuildInputs = [
+    imagemagick
+    ffmpeg
+    bash
+    coreutils
+  ];
 
-	buildPhase = ''
-		runHook preBuild
+  buildPhase = ''
+    runHook preBuild
 
-		${lib.getExe bash} ./gifmouth.sh ${gif}
+    ${lib.getExe bash} ./gifmouth.sh ${gif}
 
-		runHook postBuild
-	'';
+    runHook postBuild
+  '';
 
-	installPhase = ''
-		runHook preInstall
+  installPhase = ''
+    runHook preInstall
 
-		mkdir -p ${plymouthDir}
-		mkdir ${plymouthDir}/frames
-		mkdir ${plymouthDir}/scripts
+    mkdir -p ${plymouthDir}
+    mkdir ${plymouthDir}/frames
+    mkdir ${plymouthDir}/scripts
 
-		cp gifmouth.plymouth ${plymouthDir}
-		cp frames/* ${plymouthDir}/frames/
-		cp scripts/gifmouth.script ${plymouthDir}/scripts/
+    cp gifmouth.plymouth ${plymouthDir}
+    cp frames/* ${plymouthDir}/frames/
+    cp scripts/gifmouth.script ${plymouthDir}/scripts/
 
-		substituteInPlace ${plymouthDir}/gifmouth.plymouth --replace-fail "/usr/" "$out/"
+    substituteInPlace ${plymouthDir}/gifmouth.plymouth --replace-fail "/usr/" "$out/"
 
-		runHook postInstall
-	'';
+    runHook postInstall
+  '';
 
-	meta = {
-		description = "Plymouth theme that turns any GIF into an Animated theme";
-		homepage = "https://github.com/RemuSalminen/gifmouth-plymouth-theme";
-		license = lib.licenses.mit;
-		platforms = lib.platforms.linux;
-	};
+  meta = {
+    description = "Plymouth theme that turns any GIF/Video into an Animated theme";
+    homepage = "https://github.com/RemuSalminen/gifmouth-plymouth-theme";
+    license = lib.licenses.mit;
+    platforms = lib.platforms.linux;
+    maintainers = with lib.maintainers; [ mooses ];
+  };
 }
 
 # https://lantian.pub/en/article/modify-computer/nixos-packaging.lantian/
