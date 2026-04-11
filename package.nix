@@ -1,7 +1,6 @@
 {
   stdenvNoCC,
   fetchurl,
-  fetchFromGitHub,
   lib,
   imagemagick,
   ffmpeg,
@@ -62,7 +61,6 @@ stdenvNoCC.mkDerivation {
     homepage = "https://github.com/RemuSalminen/gifmouth-plymouth-theme";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [ mooses ];
   };
 }
 
