@@ -58,7 +58,7 @@ Define it as a themePackage:
 
 </details>
 
-Remember to change PATH, URL and HASH to their corresponding values. If gifLocal is defined, it will be used instead of the Online File.
+Remember to change PATH, URL and HASH to their corresponding values. If gifLocal is defined, it will be used instead of the Online File. If neither is defined, the default gif is used instead.
 <details>
 <summary><strong>Accessing the Package from pkgs</strong></summary>
 
